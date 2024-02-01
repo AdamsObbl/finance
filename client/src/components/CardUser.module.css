@@ -66,3 +66,19 @@
 .editNameElm:focus{
     outline: none;
 }
+.listElmEven,.listElmOdd{
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.listElmEven{
+    background-color: azure;
+}
+.listElmOdd{
+    background-color: aliceblue;
+}
+.listElmEven:hover, .listElmOdd:hover{
+   border-color: rgba(9, 109, 185, 0.592);
+}

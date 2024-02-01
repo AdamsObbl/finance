@@ -63,6 +63,7 @@ export function CardUser({ user }) {
                     dispatch(removeUser(user.id));
                     dispatch(removeAllAmountsByUserId(user.id));
                 }} />
+
             </div>
             <div className={styles.bodyElm}>
                 <div className={styles.adder}>
@@ -79,8 +80,8 @@ export function CardUser({ user }) {
                     }} />
                 </div>
                 <div className={styles.list}>
-                    {AmountsPerID.length && AmountsPerID.map((amount) =>
-                        <div key={amount.id}>
+                    {AmountsPerID.length>0 && AmountsPerID.map((amount,i) =>
+                        <div className={styles['listElm'+(i%2?'Even':'Odd')]} key={amount.id}>
                             {amount.value}/{usersNumber}={(amount.value / usersNumber).toFixed(2)}
                             <input type="button" value="-" onClick={(e) => {
                                 dispatch(removeAmount(amount.id));
