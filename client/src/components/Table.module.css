@@ -1,0 +1,13 @@
+.grid {
+    margin: 20px;
+    width: calc(100% - 40px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    /* auto-fill */
+    grid-row-gap: 4px;
+    grid-column-gap: 4px;
+    justify-content: center;
+}
+
+

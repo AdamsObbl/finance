@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid';
 
 export const UsersSlice = createSlice({
   name: 'users',
@@ -7,13 +8,21 @@ export const UsersSlice = createSlice({
   },
   reducers: {
     addUser: (state, action) => {
-      state.value = [...state.value, { name: action.payload, id: state.value.length }];
+      action.payload&&(
+      state.value = [...state.value, { name: action.payload, id: uuidv4() }]);
+    },
+    editUser: (state, action) => {
+      state.value = state.value.map(user => user.id === action.payload.id ? {...user,name:action.payload.name} : user)
+    },
+    removeUser: (state, action) => {
+      state.value = state.value.filter(user => user.id !==  action.payload);
     },
   },
 })
 
-export const { addUser } = UsersSlice.actions
+export const { addUser, editUser, removeUser } = UsersSlice.actions
 
-export const selectUsers = (state) => state.users.value
+export const selectUsers = (state) => state.users.value;
+export const selectUsersNumber = (state) => state.users.value.length;
 
 export default UsersSlice.reducer
