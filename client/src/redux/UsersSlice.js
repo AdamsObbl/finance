@@ -9,7 +9,9 @@ export const UsersSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       action.payload&&(
-      state.value = [...state.value, { name: action.payload, id: uuidv4() }]);
+      state.value = typeof action.payload === 'string'?[...state.value, { name: action.payload, id: uuidv4() }]:
+      [...state.value, { name: action.payload.name, id: action.payload.id }]
+      );
     },
     editUser: (state, action) => {
       state.value = state.value.map(user => user.id === action.payload.id ? {...user,name:action.payload.name} : user)

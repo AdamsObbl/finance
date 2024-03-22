@@ -4,13 +4,14 @@ import { addAmount, removeAllAmountsByUserId, removeAmount, selectAmount } from 
 import styles from './CardUser.module.css';
 import { editUser, removeUser, selectUsersNumber } from "../redux/UsersSlice";
 
-export function CardUser({ user }) {
+export function CardUser({ user, rate }) {
     const [newAmount, setNewAmount] = useState('');
     const dispatch = useDispatch();
     const amounts = useSelector(selectAmount);
     const AmountsPerID = useMemo(() => amounts?.filter(amount => amount.userId === user.id), [amounts, user.id])
     const sumsForAll = useMemo(() => amounts.reduce((acc, { userId, value }) => ({ ...acc, [userId]: (acc[userId] || 0) + value }), {}), [amounts]);
-    const sumOfRest = useMemo(() => Object.keys(sumsForAll).reduce((acc, key) => (key !== user.id ? acc + sumsForAll[key] : acc), 0), [sumsForAll, user.id]);
+    const sumOfRest = useMemo(() => Object.keys(sumsForAll).reduce((acc, key) => (key !== user.id+'' ? acc + sumsForAll[key] : acc), 0), [sumsForAll, user.id]);
+    const rateForID = useMemo(()=>user.id===1?1-rate:rate,[rate,user.id])
     const usersNumber = useSelector(selectUsersNumber);
     const [isNameEditing, setIsNameEditing] = useState(false)
     const inpNameRef = useRef(null);
@@ -25,7 +26,7 @@ export function CardUser({ user }) {
         return () => document.removeEventListener('click', handleDocClick);
     }, [isNameEditing])
 
-    const result = (sumsForAll[user.id] - (sumOfRest / (usersNumber - 1))) / usersNumber || 0;
+    const result = sumsForAll[user.id]*rateForID-(sumOfRest * (1-rateForID)) || 0;
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -82,7 +83,7 @@ export function CardUser({ user }) {
                 <div className={styles.list}>
                     {AmountsPerID.length>0 && AmountsPerID.map((amount,i) =>
                         <div className={styles['listElm'+(i%2?'Even':'Odd')]} key={amount.id}>
-                            {amount.value}/{usersNumber}={(amount.value / usersNumber).toFixed(2)}
+                            {amount.value}x{(+rateForID).toFixed(2)}={(amount.value * rateForID).toFixed(2)}
                             <input type="button" value="-" onClick={(e) => {
                                 dispatch(removeAmount(amount.id));
                             }} />
