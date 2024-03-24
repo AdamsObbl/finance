@@ -87,3 +87,29 @@
     font-size: .8rem;
     color: #333;
 }
+
+
+    [title] {
+      position: relative;
+    }
+    [title]::after {
+    font-size: .8em;
+      content: attr(title);
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      color: #cacaca;
+      background-color: #1f1f1f;
+      border: 1px solid;
+      width: fit-content;
+      height: fit-content;
+      padding: 5px;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity .15s ease-in-out;
+      top:90%;
+    }
+  
+    [title]:hover::after {
+opacity: 1;
+    }

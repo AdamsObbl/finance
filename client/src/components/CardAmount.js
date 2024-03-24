@@ -82,7 +82,7 @@ export function CardAmount({ setResult, user, rate }) {
             </form>
             <div className={styles.list}>
                 {AmountsPerID.length > 0 && AmountsPerID.map((amount, indx) =>
-                    <div className={styles['listElm' + (indx % 2 ? 'Even' : 'Odd')]} key={amount.id}>
+                    <div className={styles['listElm' + (indx % 2 ? 'Even' : 'Odd')]} key={amount.id} title={new Date(amount.date).toLocaleDateString()}>
                         <div className={styles.text}>
                             <span>{(amount.amount / 100).toFixed(2)}x{(+rateForID).toFixed(2)}={(amount.amount * rateForID / 100).toFixed(2)}</span>
                             <span className={styles.smalltext}>{amount.description}</span>

@@ -9,7 +9,7 @@ export const AmountSlice = createSlice({
   reducers: {
     addAmount: (state, action) => {
       action.payload.amount > 0 && (
-        state.value = [...state.value, { userId: action.payload.user_id, amount: action.payload.amount, id: action.payload.id?action.payload.id:uuidv4(), description: action.payload.description }]
+        state.value = [...state.value, { userId: action.payload.user_id, amount: action.payload.amount, id: action.payload.id?action.payload.id:uuidv4(), description: action.payload.description, date: action.payload.date_create }]
       );
     },
     removeAmount: (state, action) => {
