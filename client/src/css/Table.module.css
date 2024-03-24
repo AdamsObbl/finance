@@ -1,16 +1,13 @@
 .grid {
-    margin: 20px 0;
+    margin: 20px auto;
     width: calc(100%);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(auto-fill);
     /* auto-fill */
-    grid-row-gap: 2px;
-    grid-column-gap: 2px;
+    grid-row-gap: 0px;
+    grid-column-gap: 0px;
     justify-content: center;
-    background-color: black;
+    max-width: 1000px;
 }
-.grid > * {
-    background-color: #fff;
-  }
 

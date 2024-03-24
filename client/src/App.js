@@ -4,6 +4,7 @@ import { Table } from './components/Table';
 import { RateChanges } from './components/RateChanges';
 import { useSelector } from 'react-redux';
 import { selectUsers } from './redux/UsersSlice';
+import styles from './css/main.module.css';
 
 function App() {
   const [rate, setRate] = useState(.6);

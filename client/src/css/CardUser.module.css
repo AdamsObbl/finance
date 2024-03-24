@@ -7,6 +7,9 @@
     overflow: hidden;
     justify-content: space-between;
 }
+.elm:first-child{
+    border-right: 2px solid black;
+}
 .titlElm,.editNameElm {
     font-family: "Edu NSW ACT Foundation", cursive;
     font-optical-sizing: auto;
@@ -42,7 +45,7 @@
 }
 
 .footElm{
-    background-color: rgba(47, 47, 47, 0.189);
+    background-color: rgba(0, 0, 0 / 15%);
     font-weight: bold;
     margin-top: 2px;
     padding: 5px;

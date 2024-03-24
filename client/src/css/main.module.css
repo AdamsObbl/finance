@@ -1,0 +1,6 @@
+body{
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)),
+    url("../../public/bg.jpg");
+    background-size: clamp(100%, auto, 1500px)  clamp(100vh, auto, 1500px) ;
+}

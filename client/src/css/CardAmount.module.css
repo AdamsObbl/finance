@@ -32,10 +32,10 @@
     border-radius: 4px;
 }
 .listElmEven{
-    background-color: #f3f3f3;
+    background-color: #f3f3f3bb;
 }
 .listElmOdd{
-    background-color: #fff;
+    background-color: #fffb;
 }
 .listElmEven:hover, .listElmOdd:hover{
    border-color: rgba(9, 109, 185, 0.592);

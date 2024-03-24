@@ -32,6 +32,7 @@ export function CardAmount({ setResult, user, rate }) {
                 .then(({ data }) => {
                     setAddData({});
                     setNewAmount('');
+                    setNewDesc('');
                 })
         }
     }, [addData, dispatch]);
@@ -47,7 +48,7 @@ export function CardAmount({ setResult, user, rate }) {
         }
     }, [deleteData, dispatch]);
 
-    const handleKeyDownAmount = (e) => {
+    const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             setAddData({ user_id: user.id, amount: newAmountMulti, description: newDesc });
         }
@@ -60,15 +61,16 @@ export function CardAmount({ setResult, user, rate }) {
                     className={styles.input}
                     value={newAmount}
                     onChange={(e) => setNewAmount(e.target.value)}
-                    onKeyDown={handleKeyDownAmount}
+                    onKeyDown={handleKeyDown}
                     min="1"
                     pattern="^\d*(\.\d{0,2})?$"
-                    enterKeyHint="done"
                 />
                 <input type="text"
                     className={styles.inputText}
                     value={newDesc}
                     onChange={(e) => setNewDesc(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    enterKeyHint="done"
                 />
 
                 <button type="button" className={styles.addBtn} value="+" onClick={(e) => {
