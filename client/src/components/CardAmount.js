@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addAmount, removeAmount, selectAmount } from "../redux/AmountSlice";
 import styles from '../css/CardAmount.module.css';
@@ -6,7 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/api";
 
 export function CardAmount({ setResult, user, rate }) {
-    const inpAmount = useRef(null);
+    const inpAmountRef = useRef(null);
     const dispatch = useDispatch();
     const amounts = useSelector(selectAmount);
     const [newAmount, setNewAmount] = useState('');
@@ -34,7 +34,7 @@ export function CardAmount({ setResult, user, rate }) {
                     setAddData({});
                     setNewDesc('');
                     setNewAmount('');
-                    inpAmount.current.focus();
+                    inpAmountRef.current.focus();
                 })
         }
     }, [addData, dispatch]);
@@ -60,7 +60,7 @@ export function CardAmount({ setResult, user, rate }) {
         <>
             <form className={styles.adder}>
                 <input type="number"
-                    ref={inpNameRef}
+                    ref={inpAmountRef}
                     className={styles.input}
                     value={newAmount}
                     onChange={(e) => setNewAmount(e.target.value)}
