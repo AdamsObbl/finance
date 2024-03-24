@@ -3,7 +3,8 @@
     margin: 5px;
 }
 
-.input,.inputText {
+.input,
+.inputText {
     flex: 1 1 100%;
     min-width: 0;
     padding: 6px 8px;
@@ -12,35 +13,42 @@
     border: 1px solid rgba(27, 31, 35, .15);
 }
 
-.inputText{
+.inputText {
     flex: 1 1 175%;
     border-radius: 0;
     border-left: none;
 }
 
-.list{
+.list {
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-.listElmEven,.listElmOdd{
+.listElmEven,
+.listElmOdd {
     display: flex;
     justify-content: space-between;
     padding: 2px 5px;
     border: 1px solid transparent;
     border-radius: 4px;
 }
-.listElmEven{
+
+.listElmEven {
     background-color: #f3f3f3bb;
 }
-.listElmOdd{
+
+.listElmOdd {
     background-color: #fffb;
 }
-.listElmEven:hover, .listElmOdd:hover{
-   border-color: rgba(9, 109, 185, 0.592);
+
+.listElmEven:hover,
+.listElmOdd:hover {
+    border-color: rgba(9, 109, 185, 0.592);
 }
-.addBtn,.removeBtn{
+
+.addBtn,
+.removeBtn {
     position: relative;
     border: none;
     border-radius: 4px;
@@ -53,12 +61,15 @@
     min-width: 32px;
 
 }
-.addBtn{
+
+.addBtn {
     background-color: #2ea44f;
     border-radius: 0 4px 4px 0;
     border-left: none;
 }
-.addBtn::before,.removeBtn::before{
+
+.addBtn::before,
+.removeBtn::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -67,7 +78,8 @@
     width: 12px;
     height: 4px;
 }
-.addBtn::after{
+
+.addBtn::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -77,39 +89,43 @@
     height: 12px;
 }
 
-.text{
+.text {
     display: flex;
     flex-direction: column;
     overflow-x: auto;
     margin-right: 5px;
 }
-.smalltext{
+
+.smalltext {
     font-size: .8rem;
     color: #333;
 }
 
-
+@media (pointer: coarse),
+(hover: none) {
     [title] {
-      position: relative;
+        position: relative;
     }
+
     [title]::after {
-    font-size: .8em;
-      content: attr(title);
-      position: absolute;
-      inset: 0;
-      margin: auto;
-      color: #cacaca;
-      background-color: #1f1f1f;
-      border: 1px solid;
-      width: fit-content;
-      height: fit-content;
-      padding: 5px;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity .15s ease-in-out;
-      top:90%;
+        font-size: .8em;
+        content: attr(title);
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        color: #cacaca;
+        background-color: #1f1f1f;
+        border: 1px solid;
+        width: fit-content;
+        height: fit-content;
+        padding: 5px;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity .25s ease-in-out;
+        top: 90%;
     }
-  
+
     [title]:hover::after {
-opacity: 1;
+        opacity: 1;
     }
+}
