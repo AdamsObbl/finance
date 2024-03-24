@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/api";
 
 export function CardAmount({ setResult, user, rate }) {
+    const inpAmount = useRef(null);
     const dispatch = useDispatch();
     const amounts = useSelector(selectAmount);
     const [newAmount, setNewAmount] = useState('');
@@ -31,8 +32,9 @@ export function CardAmount({ setResult, user, rate }) {
             axios.post(BASE_URL + '/amounts', addData)
                 .then(({ data }) => {
                     setAddData({});
-                    setNewAmount('');
                     setNewDesc('');
+                    setNewAmount('');
+                    inpAmount.current.focus();
                 })
         }
     }, [addData, dispatch]);
@@ -58,6 +60,7 @@ export function CardAmount({ setResult, user, rate }) {
         <>
             <form className={styles.adder}>
                 <input type="number"
+                    ref={inpNameRef}
                     className={styles.input}
                     value={newAmount}
                     onChange={(e) => setNewAmount(e.target.value)}
