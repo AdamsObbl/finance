@@ -8,12 +8,12 @@ export const AmountSlice = createSlice({
   },
   reducers: {
     addAmount: (state, action) => {
-      action.payload.value > 0 && (
-        state.value = [...state.value, { userId: action.payload.userId, value: +action.payload.value, id: uuidv4() }]
+      action.payload.amount > 0 && (
+        state.value = [...state.value, { userId: action.payload.user_id, amount: action.payload.amount, id: action.payload.id?action.payload.id:uuidv4(), description: action.payload.description }]
       );
     },
     removeAmount: (state, action) => {
-      state.value = state.value.filter(item => item.id !== action.payload);
+      state.value = state.value.filter(item => item.id !== action.payload.id);
     },
     removeAllAmountsByUserId: (state, action) => {
       state.value = state.value.filter(item => item.userId !== action.payload);

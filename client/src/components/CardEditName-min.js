@@ -1,0 +1,1 @@
+export function CardUser({user:r,rate:e}){}

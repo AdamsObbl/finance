@@ -1,0 +1,89 @@
+.adder {
+    display: flex;
+    margin: 5px;
+}
+
+.input,.inputText {
+    flex: 1 1 100%;
+    min-width: 0;
+    padding: 6px 8px;
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+    border: 1px solid rgba(27, 31, 35, .15);
+}
+
+.inputText{
+    flex: 1 1 175%;
+    border-radius: 0;
+    border-left: none;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.listElmEven,.listElmOdd{
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.listElmEven{
+    background-color: #f3f3f3;
+}
+.listElmOdd{
+    background-color: #fff;
+}
+.listElmEven:hover, .listElmOdd:hover{
+   border-color: rgba(9, 109, 185, 0.592);
+}
+.addBtn,.removeBtn{
+    position: relative;
+    border: none;
+    border-radius: 4px;
+    background-color: #e74c3c;
+    font-weight: bolder;
+    font-size: large;
+    line-height: 0;
+    font-family: math;
+    min-height: 32px;
+    min-width: 32px;
+
+}
+.addBtn{
+    background-color: #2ea44f;
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+}
+.addBtn::before,.removeBtn::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background-color: #fff;
+    width: 12px;
+    height: 4px;
+}
+.addBtn::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background-color: #fff;
+    width: 4px;
+    height: 12px;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    margin-right: 5px;
+}
+.smalltext{
+    font-size: .8rem;
+    color: #333;
+}

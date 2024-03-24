@@ -1,0 +1,1 @@
+export const BASE_URL="development"===process.env.NODE_ENV?"http://localhost:3001":"./api";

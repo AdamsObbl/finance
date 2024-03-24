@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Users.module.css';
+import React from 'react';
+import styles from '../css/Users.module.css';
 
 export function RateChanges({ rate, setRate }) {
 

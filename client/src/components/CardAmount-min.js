@@ -1,0 +1,1 @@
+import React from"react";export function CardAmount({user:t,styles:e,setChangeData:r}){return{}}
