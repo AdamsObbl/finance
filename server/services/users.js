@@ -22,7 +22,7 @@ async function change({ id, status, name }) {
     `UPDATE finance_users SET
   ${name?`name='${name}',`:''}
   status = '${status||0}',
-  date_delete = ${status===1?'now(),':"'0000-00-00 00:00:00',"}
+  date_delete = ${status===1?'now()':"'0000-00-00 00:00:00',"}
   ${status===1?'':'date_change = now()'}
   WHERE id = '${id}';`
   );
