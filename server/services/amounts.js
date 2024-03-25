@@ -18,13 +18,13 @@ async function add({ description, user_id, amount }) {
 
 async function change({ id, status, amount, description }) {
     const res = await db.query(
-      `UPDATE finance_amounts SET
-      ${amount?`amount='${amount}',`:''}
-      ${description?`description='${description},'`:''}
-      status = '${status||0}',
-      date_delete = ${status===1?'now(),':"'0000-00-00 00:00:00',"}
-      ${status===1?'':'date_change = now()'}
-      WHERE id = '${id}';`
+        `UPDATE finance_amounts SET
+        ${amount?`amount='${amount}',`:''}
+        ${description?`description='${description}',`:''}
+        status = '${status||0}',
+        date_delete = ${status===1?'now(),':"'0000-00-00 00:00:00',"}
+        ${status===1?'':'date_change = now()'}
+        WHERE id = '${id}';`
     );
     return res
   }

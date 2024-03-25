@@ -4,13 +4,13 @@ import styles from '../css/CardInputAmount.module.css';
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
-import { addAmount } from "../redux/AmountSlice";
+import { addAmount, editUser } from "../redux/AmountSlice";
 
-export function CardInputAmount({user}) {
+export function CardInputAmount({user,amount,setIsEdit}) {
     const inpAmountRef = useRef(null);
     const dispatch = useDispatch();
-    const [newAmount, setNewAmount] = useState('');
-    const [newDesc, setNewDesc] = useState('');
+    const [newAmount, setNewAmount] = useState((amount?.amount/100).toFixed(2)||'');
+    const [newDesc, setNewDesc] = useState(amount?.description||'');
     const [newAmountMulti, setNewAmountMulti] = useState(0);
     useEffect(() => {
         setNewAmountMulti(newAmount * 100);
@@ -30,9 +30,33 @@ export function CardInputAmount({user}) {
         }
     }, [addData, dispatch]);
 
+    const [changeData, setChangeData] = useState({});
+    useEffect(() => {
+        if (Object.keys(changeData).length) {
+            dispatch(editUser(changeData));
+            axios.put(BASE_URL + '/amounts', changeData)
+                .then(({ data }) => {
+                    setChangeData({});
+                    setIsEdit(-1);
+                })
+        }
+    }, [changeData, dispatch, setIsEdit]);
+
+    const setActionData=()=>{
+        if(!newAmountMulti){
+            return;
+        } 
+        if(amount){
+            setChangeData({ id: amount.id, user_id: user.id, amount: newAmountMulti, description: newDesc })
+        }
+        else{
+            setAddData({ user_id: user.id, amount: newAmountMulti, description: newDesc });
+        }
+    }
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            setAddData({ user_id: user.id, amount: newAmountMulti, description: newDesc });
+            setActionData()
         }
     }
 
@@ -54,8 +78,6 @@ export function CardInputAmount({user}) {
             enterKeyHint="done"
         />
 
-        <button type="button" className={style.addBtn} value="+" onClick={(e) => {
-            newAmountMulti !== 0 && setAddData({ user_id: user.id, amount: newAmountMulti, description: newDesc });
-        }} ></button>
+        <button type="button" className={amount?style.okBtn:style.addBtn} value="+" onClick={()=>setActionData()} ></button>
     </form>);
 }

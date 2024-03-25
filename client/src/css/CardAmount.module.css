@@ -26,6 +26,7 @@
     border-color: rgba(9, 109, 185, 0.592);
 }
 
+.okBtn,
 .addBtn,
 .removeBtn {
     position: relative;
@@ -41,14 +42,17 @@
 
 }
 
-.addBtn {
+.addBtn,.okBtn{
     background-color: #2ea44f;
     border-radius: 0 4px 4px 0;
     border-left: none;
 }
 
 .addBtn::before,
-.removeBtn::before {
+.removeBtn::before,
+.addBtn::after,
+.okBtn::after,
+.okBtn::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -58,15 +62,23 @@
     height: 4px;
 }
 
-.addBtn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    background-color: #fff;
+.okBtn::after, .addBtn::after {
     width: 4px;
     height: 12px;
 }
+
+.okBtn::before{
+    top: -0.5px;
+    left: -11.5px;
+    width: 5px;
+    transform: rotate(45deg) translate(1px,-2px);
+}
+
+.okBtn::after{
+    transform: rotate(45deg) translate(1px,-2px);
+
+}
+
 
 .text {
     display: flex;
