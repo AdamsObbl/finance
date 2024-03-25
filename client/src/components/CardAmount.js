@@ -1,43 +1,26 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAmount, removeAmount, selectAmount } from "../redux/AmountSlice";
+import { removeAmount, selectAmount } from "../redux/AmountSlice";
 import styles from '../css/CardAmount.module.css';
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
+import { CardInputAmount } from "./CardInputAmount";
 
 export function CardAmount({ setResult, user, rate }) {
-    const inpAmountRef = useRef(null);
     const dispatch = useDispatch();
     const amounts = useSelector(selectAmount);
-    const [newAmount, setNewAmount] = useState('');
-    const [newDesc, setNewDesc] = useState('');
-    const [newAmountMulti, setNewAmountMulti] = useState(0);
     const AmountsPerID = useMemo(() => amounts?.filter(amount => amount.userId === user.id), [amounts, user.id]);
     const sumsForAll = useMemo(() => amounts.reduce((acc, { userId, amount }) => ({ ...acc, [userId]: (acc[userId] || 0) + amount }), {}), [amounts]);
     const sumOfRest = useMemo(() => Object.keys(sumsForAll).reduce((acc, key) => (key !== user.id + '' ? acc + sumsForAll[key] : acc), 0), [sumsForAll, user.id]);
     const rateForID = useMemo(() => user.id === 1 ? 1 - rate : rate, [rate, user.id]);
 
-    useEffect(() => {
-        setNewAmountMulti(newAmount * 100)
-    }, [newAmount])
+
 
     useEffect(() => {
         setResult(sumsForAll[user.id] * rateForID - (sumOfRest * (1 - rateForID)) || 0);
     }, [setResult, sumsForAll, user.id, rateForID, sumOfRest])
 
-    const [addData, setAddData] = useState({});
-    useEffect(() => {
-        if (Object.keys(addData).length) {
-            dispatch(addAmount(addData));
-            axios.post(BASE_URL + '/amounts', addData)
-                .then(({ data }) => {
-                    setAddData({});
-                    setNewDesc('');
-                    setNewAmount('');
-                    inpAmountRef.current.focus();
-                })
-        }
-    }, [addData, dispatch]);
+
 
     const [deleteData, setDeleteData] = useState({});
     useEffect(() => {
@@ -50,36 +33,11 @@ export function CardAmount({ setResult, user, rate }) {
         }
     }, [deleteData, dispatch]);
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            setAddData({ user_id: user.id, amount: newAmountMulti, description: newDesc });
-        }
-    }
+ 
 
     return (
         <>
-            <form className={styles.adder}>
-                <input type="number"
-                    ref={inpAmountRef}
-                    className={styles.input}
-                    value={newAmount}
-                    onChange={(e) => setNewAmount(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    min="1"
-                    pattern="^\d*(\.\d{0,2})?$"
-                />
-                <input type="text"
-                    className={styles.inputText}
-                    value={newDesc}
-                    onChange={(e) => setNewDesc(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    enterKeyHint="done"
-                />
-
-                <button type="button" className={styles.addBtn} value="+" onClick={(e) => {
-                    newAmountMulti !== 0 && setAddData({ user_id: user.id, amount: newAmountMulti, description: newDesc });
-                }} ></button>
-            </form>
+        <CardInputAmount user={user}/>
             <div className={styles.list}>
                 {AmountsPerID.length > 0 && AmountsPerID.map((amount, indx) =>
                     <div className={styles['listElm' + (indx % 2 ? 'Even' : 'Odd')]} key={amount.id} title={new Date(amount.date).toLocaleDateString()}>

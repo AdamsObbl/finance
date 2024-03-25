@@ -18,13 +18,15 @@ async function add({ name }) {
 }
 
 async function change({ id, status, name }) {
+  const log=   `UPDATE finance_users SET
+  ${name?`name='${name}',`:''}
+  status = '${status||0}',
+  date_delete = ${status===1?'now(),':"'0000-00-00 00:00:00',"}
+  ${status===1?'':'date_change = now()'}
+  WHERE id = '${id}';`
+  console.log(log);
   const res = await db.query(
-    `UPDATE finance_users SET
-    ${name?`name='${name}'`:''}
-    status = '${status||0}',
-    date_delete = ${status===1?'now()':'0000-00-00 00:00:00'}
-    ${status===1?'':'date_change = now()'}
-    WHERE id = '${id}';`
+    log
   );
   return res
 }
