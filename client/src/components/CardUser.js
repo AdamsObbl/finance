@@ -23,7 +23,6 @@ export function CardUser({ user, rate }) {
             axios.put(BASE_URL + '/users', debounceData)
                 .then(({ data }) => {
                     setChangeData({});
-                    console.log('eee');
                 })
         }
     }, [debounceData, dispatch]);
