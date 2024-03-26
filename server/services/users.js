@@ -10,11 +10,12 @@ async function get() {
 }
 
 async function add({ name }) {
-  const res = await db.query(
+  const [res] = await db.query(
     `INSERT INTO finance_users (name, status, date_create, date_change, date_delete)
-    VALUES ('${name}', '0', now(), now(), '0000-00-00 00:00:00');`
+    VALUES ('${name}', '0', now(), now(), '0000-00-00 00:00:00')
+    RETURNING id;`
   );
-  return res;
+  return res.id;
 }
 
 async function change({ id, status, name }) {

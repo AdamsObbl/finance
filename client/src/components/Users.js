@@ -12,9 +12,10 @@ export function Users() {
     const [saveData, setSaveData] = useState('');
     useEffect(() => {
         if (saveData) {
-            dispatch(addUser(saveData));
             axios.post(BASE_URL + '/users', { name: saveData })
                 .then(({ data }) => {
+                    saveData.id = data;
+                    dispatch(addUser(saveData));
                     setSaveData('');
                     setName('');
                 })

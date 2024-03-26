@@ -12,7 +12,7 @@ export const AmountSlice = createSlice({
         state.value = [...state.value, { userId: action.payload.user_id, amount: action.payload.amount, id: action.payload.id?action.payload.id:uuidv4(), description: action.payload.description, date: action.payload.date_create }]
       );
     },
-    editUser: (state, action) => {
+    editAmount: (state, action) => {
       state.value = state.value.map(item => item.id === action.payload.id ? {...item,amount:action.payload.amount,description:action.payload.description} : item)
     },
     removeAmount: (state, action) => {
@@ -24,7 +24,7 @@ export const AmountSlice = createSlice({
   },
 })
 
-export const { addAmount, editUser, removeAmount, removeAllAmountsByUserId } = AmountSlice.actions
+export const { addAmount, editAmount, removeAmount, removeAllAmountsByUserId } = AmountSlice.actions
 
 export const selectAmount = (state) => state.amounts.value;
 

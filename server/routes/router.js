@@ -17,6 +17,16 @@ router.get('/', async function (req, res, next) {
   }
 });
 
+router.get('/last', async function (req, res, next) {
+  try {
+    res.json(await dbService.getLast(req.query));
+  } catch (err) {
+    console.error(`Error while getting element `, err.message);
+    next(err);
+  }
+});
+
+
 router.post('/', async function (req, res, next) {
   try {
     res.json(await dbService.add(req.body));

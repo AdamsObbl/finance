@@ -4,7 +4,7 @@ import styles from '../css/CardInputAmount.module.css';
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
-import { addAmount, editUser } from "../redux/AmountSlice";
+import { addAmount, editAmount } from "../redux/AmountSlice";
 
 export function CardInputAmount({user,amount,setIsEdit}) {
     const inpAmountRef = useRef(null);
@@ -19,9 +19,11 @@ export function CardInputAmount({user,amount,setIsEdit}) {
     const [addData, setAddData] = useState({});
     useEffect(() => {
         if (Object.keys(addData).length) {
-            dispatch(addAmount(addData));
+
             axios.post(BASE_URL + '/amounts', addData)
-                .then(({ data }) => {
+                .then(({data}) => {
+                    addData.id=data;
+                    dispatch(addAmount(addData));
                     setAddData({});
                     setNewDesc('');
                     setNewAmount('');
@@ -33,7 +35,7 @@ export function CardInputAmount({user,amount,setIsEdit}) {
     const [changeData, setChangeData] = useState({});
     useEffect(() => {
         if (Object.keys(changeData).length) {
-            dispatch(editUser(changeData));
+            dispatch(editAmount(changeData));
             axios.put(BASE_URL + '/amounts', changeData)
                 .then(({ data }) => {
                     setChangeData({});
