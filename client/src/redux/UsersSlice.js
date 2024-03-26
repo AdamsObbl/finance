@@ -8,16 +8,22 @@ export const UsersSlice = createSlice({
   },
   reducers: {
     addUser: (state, action) => {
-      action.payload&&(
-      state.value = typeof action.payload === 'string'?[...state.value, { name: action.payload, id: uuidv4() }]:
-      [...state.value, { name: action.payload.name, id: action.payload.id }]
+      action.payload.name && (      
+        state.value = [...state.value, { 
+        id: action.payload.id?action.payload.id:uuidv4(),
+        name: action.payload.name,
+        status: action.payload.status,
+        date_create: action.payload.date_create,
+        date_change: action.payload.date_change,
+        date_delete: action.payload.date_delete
+       }]
       );
     },
     editUser: (state, action) => {
-      state.value = state.value.map(user => user.id === action.payload.id ? {...user,name:action.payload.name} : user)
+      state.value = state.value.map(user => user.id === action.payload.id ? {...user,name:action.payload.name,status:action.payload.status,date_delete: action.payload.date_delete,date_change: action.payload.date_change} : user)
     },
     removeUser: (state, action) => {
-      state.value = state.value.filter(user => user.id !==  action.payload);
+      state.value = state.value.map(user => user.id === action.payload.id ? {...user,date_delete: action.payload.date_delete,status:1} : user)
     },
   },
 })

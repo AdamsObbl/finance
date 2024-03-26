@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App" styles={styles}>
       <header className="App-header">
-      {users.length===2?null:<Users />}
+      {users?.filter(user=>!user.status)?.length===2?null:<Users />}
         <RateChanges rate={rate} setRate={setRate} />
         <Table rate={rate}  />
       </header>

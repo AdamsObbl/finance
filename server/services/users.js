@@ -3,8 +3,7 @@ const config = require('../config');
 
 async function get() {
   const rows = await db.query(
-    `SELECT id, name, date_create, status, date_change, date_delete
-        FROM finance_users`
+    `SELECT * FROM finance_users`
   );
   return rows || [];
 }

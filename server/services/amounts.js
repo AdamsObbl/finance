@@ -40,7 +40,7 @@ async function change({ id, status, amount, description }) {
         ${status === 1 ? '' : 'date_change = now()'}
         WHERE id = '${id}';`;
     const res = await db.query(query);
-    return res
+    return res;
 }
 
 module.exports = {

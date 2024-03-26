@@ -30,7 +30,7 @@ export function Table({ rate }) {
             return;
         }
         userData.forEach(element => {
-            element.status === 0 && dispatch(addUser(element));
+            dispatch(addUser(element));
         });
     }, [userData, dispatch, users.length]);
     useEffect(() => {
@@ -38,12 +38,12 @@ export function Table({ rate }) {
           return
         }
         amountData.forEach(element => {
-          element.status === 0 && dispatch(addAmount(element));
+          dispatch(addAmount(element));
         });
       }, [amountData,dispatch,amounts.length]);
 
     return <div className={styles.grid}>
-        {users?.map((user) =>
+        {users?.filter(user=>!user?.status)?.map((user) =>
             <CardUser user={user} key={user.id} rate={rate} />
         )}
     </div>
