@@ -1,0 +1,1 @@
+export const getDatesByMonth=e=>e.reduce(((e,t,c)=>{const r=t.date_create.slice(0,7);return e[r]=[...e[r]||[],c],e}),{});

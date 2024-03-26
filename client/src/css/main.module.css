@@ -4,3 +4,92 @@ body{
     url("../../public/bg.jpg");
     background-size: clamp(100%, auto, 1500px)  clamp(100vh, auto, 1500px) ;
 }
+/* 
+.nav{
+    color: black;
+} */
+
+.tabs{
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+.tabs li{
+    --radius-size: 15px;
+    --color-line: #aaa;
+    position: relative;
+    flex: 1 1 100%;
+    text-align: center;
+    padding: 10px 5px;
+    cursor: pointer;
+}
+
+.tabs li::after,.tabs li::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: 1px solid transparent;
+    border-bottom-color: var(--color-line);
+    z-index: 1;
+}
+
+.tabs li > span {
+    position: relative;
+    z-index: 2;
+}
+
+.tabs li[data-active=true]::before,.tabs li[data-active=true]::after {
+    background-color: transparent;
+}
+
+.tabs li[data-active=true]::before{
+    border: 1px solid var(--color-line);
+    border-bottom: 0px solid;
+    /* background: linear-gradient(0deg, transparent 0%, #ebebeb 100%); */
+    border-radius: var(--radius-size) var(--radius-size) 0 0;
+    height: calc(100% - var(--radius-size));
+    width: calc(100% - 1px);
+    bottom: calc(var(--radius-size) - 1px);
+}
+.tabs li[data-active=true]::after {
+    border-color: transparent;
+    height: calc(100% - var(--radius-size));
+    width: calc(100% - 1px);
+    top: calc(var(--radius-size));
+}
+.tabs li[data-active=true]+li::after,.tabs li:has(+ [data-active=true])::after{
+    border: 1px solid var(--color-line);
+    border-top-color: transparent;
+    border-radius: 0 0 var(--radius-size) var(--radius-size);
+    height: calc(100% - var(--radius-size));
+    top: var(--radius-size);
+}
+
+.tabs li[data-active=true]+li::after{
+    border-right-color: transparent;
+    border-radius: 0 0 0 var(--radius-size);
+}
+.tabs li[data-active=true]+li::before{
+    border-color: transparent;
+}
+
+.tabs li:has(+ [data-active=true])::after{
+    border-left-color: transparent;
+    border-radius: 0 0 var(--radius-size) 0 ;
+    width: calc(100% - 1px);
+}
+.tabs li:has(+ [data-active=true])::before{
+    border-color: transparent;
+}
+.tabs li:first-child[data-active=true]::before{
+    border-top-left-radius: 0;
+    border-left-color: transparent;
+}
+.tabs li:last-child[data-active=true]::before{
+    border-top-right-radius: 0;
+    border-right-color: transparent;
+}
+
