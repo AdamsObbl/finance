@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Chart } from "react-charts";
 
 
-export default function StatsBar({ data, Averages, elementType }) {
+export default function StatsBar({ data, Averages, elementType,TouchStart,TouchMove,TouchEnd }) {
 
 
     const dataPack = [
@@ -35,10 +35,10 @@ export default function StatsBar({ data, Averages, elementType }) {
     );
 
     return (
-        <div
+        <div onTouchStart={TouchStart} onTouchMove={TouchMove} onTouchEnd={TouchEnd}
             style={{
                 width: `100%`,
-                height: `calc(100vh - 150px)`,
+                height: `calc(100vh - 200px)`,
             }}
         >
             <Chart

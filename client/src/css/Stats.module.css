@@ -67,3 +67,14 @@
 .nextBtn span::before,.prevBtn span::before{
     top:8px;
 }
+
+.dots{
+    border: 1px solid #ccc;
+    width: 10px;
+    aspect-ratio: 1;
+    border-radius: 50vh;
+    margin: 5px;
+}
+.dots[data-active=true]{
+    background-color: #ccc;
+}
