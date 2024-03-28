@@ -1,0 +1,160 @@
+.addNewTarget {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 100%;
+    border: 2px solid #3cc5e7;
+    display: block;
+    width: 250px;
+    aspect-ratio: 1;
+}
+
+.btnAdd{
+    --radius: 20px;
+    --wide: 50px;
+    --tall: 180px;
+    --border:4px;
+    position: relative;
+    min-height: 200px;
+    min-width: 200px;
+    border: none;
+    background-color: transparent;
+}
+.btnAdd .plus:first-child{
+    --color: #afafaf;
+    --size: var(--radius);
+    --this-wide: var(--wide);
+    --this-tall: var(--tall);
+}
+
+
+.btnAdd .plus:last-child{
+    --color: #efefef;
+    --size: calc(var(--radius) + 1px);
+    --this-wide: calc(var(--wide) - var(--border));
+    --this-tall: calc(var(--tall) - var(--border));
+}
+
+.btnAdd .plus:hover{
+    --color: #e5e5e5;
+
+}
+
+.btnAdd .plus:first-child:hover{
+    --color: #4f4f4f;
+}
+
+
+.plus {
+    position: absolute;
+    inset: 0;
+
+    background-color: transparent;
+    /* filter: drop-shadow(0px 0px 0px #000000); */
+    display: block;
+
+    /* border: 1px solid #afafaf */
+    /* font-weight: bolder;
+    font-size: large;
+    line-height: 0;
+    font-family: math;
+    position: relative;
+    margin: 5px;
+    cursor: pointer; */
+}
+
+.plus span,
+.plus span::before,
+.plus span:nth-child(1)::after {
+
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: block;
+}
+
+.plus span::before,
+.plus span:nth-child(1)::after {
+    content: '';
+}
+
+
+
+.plus span:nth-child(1)::before,
+.plus span:nth-child(1)::after {
+    background-color: var(--color);
+    width: var(--this-tall);
+    height: var(--this-wide);
+    border-radius: calc(var(--size) / 2  + 1.5px);
+}
+
+.btnAdd .plus:last-child span:nth-child(1)::before,
+.btnAdd .plus:last-child span:nth-child(1)::after 
+{
+    border-radius: calc(var(--size)/2);
+}
+
+.plus span:nth-child(1)::after {
+    width: var(--this-wide);
+    height: var(--this-tall);
+}
+
+.plus span:not(:first-child) {
+    width: var(--size);
+    aspect-ratio: 1;
+    /* overflow: hidden; */
+}
+
+
+
+.plus span:not(:first-child)::before {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.plus span:nth-child(2) {
+    top: calc(0px - (var(--this-wide) + var(--size)));
+    left: calc(var(--this-wide) + var(--size));
+}
+
+.plus span:nth-child(2)::before {
+    bottom: 0;
+    left: 0;
+    box-shadow: calc(0px - var(--size) /2) calc(var(--size) /2) 0 0 var(--color);
+}
+
+.plus span:nth-child(3) {
+    top: calc(0px - (var(--this-wide) + var(--size)));
+    left: calc(0px - (var(--this-wide) + var(--size)));
+}
+
+.plus span:nth-child(3)::before {
+    bottom: 0;
+    right: 0;
+    box-shadow: calc(var(--size) /2) calc(var(--size) /2) 0 0 var(--color);
+}
+
+.plus span:nth-child(4) {
+    top: calc(var(--this-wide) + var(--size));
+    left: calc(var(--this-wide) + var(--size));
+}
+
+.plus span:nth-child(4)::before {
+    top: 0;
+    left: 0;
+    box-shadow: calc(0px - var(--size) /2) calc(0px - var(--size) /2) 0 0 var(--color);
+}
+
+.plus span:nth-child(5) {
+    top: calc(var(--this-wide) + var(--size));
+    left: calc(0px - (var(--this-wide) + var(--size)));
+}
+
+.plus span:nth-child(5)::before {
+    top: 0;
+    right: 0;
+    box-shadow: calc(var(--size) /2) calc(0px - var(--size) /2) 0 0 var(--color);
+}
+

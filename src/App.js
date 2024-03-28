@@ -6,11 +6,12 @@ import { useSelector } from 'react-redux';
 import { selectUsers } from './redux/UsersSlice';
 import styles from './css/main.module.css';
 import { Stats } from './components/Stats';
+import { Targets } from './components/Targets';
 
 function App() {
   const [rate, setRate] = useState(.6);
   const users = useSelector(selectUsers);
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(2);
 
   return (
     <div className="App">
@@ -31,7 +32,7 @@ function App() {
           <Stats />
         </section>,
         <section>
-
+          <Targets />
         </section>
       ][active]}
     </div>
